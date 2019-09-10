@@ -37,10 +37,17 @@ def is_word_guessed(secret_word, letters_guessed):
         if lettersword == 1:
             return True
         else: False
+    # for letters in secret_word:
+    #     if letters in letters_guessed:
+    #         continue
+    #     else:
+    #         return False
+    #
+    # return True
+    #
 
 
-
-    # pass
+        # pass
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -53,14 +60,16 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
 
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly s
+    guessed_letter = []
+
     for letter in secret_word:
         if letter in letters_guessed:
-            letterstring = letter + ""
+            guessed_letter.append(letter)
         else:
-            letterstring = "_"
-            return print(letterstring)
+            guessed_letter.append("_")
+    return ''.join(guessed_letter)
 
-    # pass
+            # pass
 
 
 def is_guess_in_word(guess, secret_word):
@@ -75,12 +84,12 @@ def is_guess_in_word(guess, secret_word):
     #TODO: check if the letter guess is in the secret word
 
     for letter in secret_word:
-        if (guess == letter):
+        if letter == guess:
             return True
-        else:
-            return False
 
-    # pass
+    return False
+
+            # pass
 
 
 
@@ -91,35 +100,44 @@ def spaceman(secret_word):
     Args:
       secret_word (string): the secret word to guess.
     '''
-    play = True
-    letters_guessed = []
-    attempts = 7
+
+
 
     #TODO: show the player information about the game according to the project spec
     print("----------------------------")
     print("Welcome To Spaceman")
     print("The secret word contains: {} letters.".format(len(secret_word)))
-    print("You have 7 incorrect guesses")
-    print(secret_word)
+    # print(secret_word)
+
+    letters_guessed = []
+
+    attempts = len(secret_word)
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-    while play:
+    while attempts > 0:
         print("-----------------")
         guess = input("Enter a letter: ")
 
-        if (guess.isalpha and len(guess) == 1 and attempts >7):
-            print("Nah cant do that bruh one letter try again")
+        if len(guess) > 1:
+            print("Nah can't do that bruh only one letter try again")
 
-        elif (guess in letters_guessed):
-            print("You guessed this already")
+        if is_guess_in_word(guess, secret_word):
+            print("You guessed correctly")
+            letters_guessed.append(guess)
+
+            if is_word_guessed(secret_word, letters_guessed):
+                print ("ya yeet")
 
         else:
-            letters_guessed += guess   # TRY WITHOUT append
-            if is_word_guessed(secret_word, guess):
-                    print ("ya yeet")
-                    return
-            else:
-                    print("incorrect")
-                    attempts -= 1
+            print("Nah try again g")
+            attempts -=1
+        print(get_guessed_word(secret_word, letters_guessed))
+        print("attempts : " +str(attempts))
+
+    else:
+        print("Thats an L my guy")
+        print("The correct word is, " + secret_word)
+
+
 
 # if (attempts < 1):
 #     print("Trash")
