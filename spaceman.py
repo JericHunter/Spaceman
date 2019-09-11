@@ -96,7 +96,7 @@ def spaceman(secret_word):
     print("----------------------------")
     print("Welcome To Spaceman")
     print("The secret word contains: {} letters.".format(len(secret_word)))
-    print(secret_word)
+    # print(secret_word)
 
     letters_guessed = []
 
@@ -138,7 +138,7 @@ while play:
     play = input("Want to run it back type Y/N : ")
     if play == "Y":
              play = True
-    else:
+    elif play == "N":
              play = False
 
 
