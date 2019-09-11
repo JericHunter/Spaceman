@@ -26,25 +26,14 @@ def is_word_guessed(secret_word, letters_guessed):
     '''
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
 
-    lettersword = len(secret_word)
-    i = 0
+    for letters in secret_word:
+        if letters in letters_guessed:
+            continue
+        else:
+            return False
 
-    for letter in secret_word:
-        number_letters = secret_word.count(letter)
-        if (number_letters > 0):
-            i += number_letters
+    return True
 
-        if lettersword == 1:
-            return True
-        else: False
-    # for letters in secret_word:
-    #     if letters in letters_guessed:
-    #         continue
-    #     else:
-    #         return False
-    #
-    # return True
-    #
 
 
         # pass
@@ -107,7 +96,7 @@ def spaceman(secret_word):
     print("----------------------------")
     print("Welcome To Spaceman")
     print("The secret word contains: {} letters.".format(len(secret_word)))
-    # print(secret_word)
+    print(secret_word)
 
     letters_guessed = []
 
@@ -121,11 +110,13 @@ def spaceman(secret_word):
             print("Nah can't do that bruh only one letter try again")
 
         if is_guess_in_word(guess, secret_word):
-            print("You guessed correctly")
+            print("You guessed correctly, the word is " + secret_word)
             letters_guessed.append(guess)
 
+
             if is_word_guessed(secret_word, letters_guessed):
-                print ("ya yeet")
+                print("You are GOATED")
+                break
 
         else:
             print("Nah try again g")
@@ -138,12 +129,17 @@ def spaceman(secret_word):
         print("The correct word is, " + secret_word)
 
 
+play = True
+while play:
+    secret_word = load_word()
+    spaceman(secret_word)
 
-# if (attempts < 1):
-#     print("Trash")
-# else:
-#     print("Goated")
 
+    play = input("Want to run it back type Y/N : ")
+    if play == "Y":
+             play = True
+    else:
+             play = False
 
 
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
